@@ -1,3 +1,4 @@
+#!/bin/bash
 #Program to print n terms in a fibonacci series
 
 echo "How many terms ? : "
