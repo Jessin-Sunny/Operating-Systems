@@ -1,4 +1,4 @@
-
+#!/bin/bash
 #Program for Addition, Substraction, Multiplication, Division and Remainder
 
 ch="y"
