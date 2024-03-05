@@ -1,0 +1,13 @@
+1. Write a program which creates a child process and the parent process waits for the child process to exit after printing the process id of the child and
+parent process. 
+(Use: fork, wait, getpid, getppid, exit System Calls).
+
+2. Write a program where a parent process creates a child process and then the child process loads another program to add two numbers into its memory space.
+The parent process should wait for the child process to exit. 
+(Use: fork, execlp, wait, exit System calls).
+
+3. Write a program which opens the directory in which it is executed, reads the file contained in it and displays the status of each file contained in it.
+(Use: opendir, readdir, closedir and stat System calls).
+
+4. Write a program to create a file, write some data to it and then read from it. 
+(Use: open, write, read and close System Calls).
