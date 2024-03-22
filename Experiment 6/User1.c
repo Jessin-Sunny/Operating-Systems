@@ -6,50 +6,50 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-struct area
+struct shared_area
 {
-    int server_up;
-    int client_up;
+    int user1_up;
+    int user2_up;
     int rw;
     char msg[100];
 };
 
-struct area* shmptr;
+struct shared_area* shmptr;
 
 int main()
 {
     int shmid;
-    int key=670;
-    shmid=shmget(key,sizeof(struct area),IPC_CREAT | 0666);
-    shmptr=(struct area*)shmat(shmid,NULL,0);
+    int key=520;
+    shmid=shmget(key,sizeof(struct shared_area),IPC_CREAT | 0666);
+    shmptr=(struct shared_area*)shmat(shmid,NULL,0);
     shmptr->rw=0;
     while(1)
     {
         while(shmptr->rw != 1);
-        while(shmptr->client_up == 0)
+        while(shmptr->user2_up == 0)
         {
             printf("Recieved from user2 : ");
-            if(shmptr->msg == "stop")
+            if(strcmp(shmptr->msg,"stop") == 0)
             {
                 exit(1);
             }
             else
             {
                 puts(shmptr->msg);
-                shmptr->server_up=0;
-                shmptr->client_up=1;
             }
-            printf("User 1 : ");
-            if(shmptr->msg == "stop")
-            {
-                exit(1);
-            }
-            else
-            {
-                fgets(shmptr->msg,100,stdin);
-                shmptr->rw=0;
-            }
+            shmptr->user1_up=0;
+            shmptr->user2_up=1;
         }
+        printf("User 1 : ");
+        if(strcmp(shmptr->msg,"stop") == 0)
+        {
+            exit(1);
+        }
+        else
+        {
+            fgets(shmptr->msg,sizeof(shmptr->msg),stdin);
+        }
+        shmptr->rw=0;
     }
     shmctl(shmid,IPC_RMID,NULL);
     return 0;
