@@ -21,16 +21,10 @@ struct message* mptr;
 int main()
 {
     int fd;
-    fd=shm_open("Shared", O_CREAT | O_RDWR, 0666);
+    fd=shm_open("Shared", O_RDWR, 0666);
     if (fd == -1)
     {
         perror("shm_open");
-        exit(1);
-    }
-
-    if(ftruncate(fd, SIZE) == -1)
-    {
-        perror("ftruncate");
         exit(1);
     }
 
@@ -41,37 +35,33 @@ int main()
         exit(1);
     }
     mptr->flag=1;
-    mptr->turn=1;
+    mptr->turn=2;
     while(mptr->flag == 1)
     {
-        while(mptr->turn != 1);
-        if(mptr->user2_up == 1)
+        while(mptr->turn != 2);
+        if(mptr->user1_up == 1)
         {
-            printf("Message from USER2 : %s\n",mptr->msg);
-            mptr->user2_up=0;
+            printf("Message from USER1 : %s\n",mptr->msg);
+            mptr->user1_up=0;
         }
-        if(mptr->user1_up == 0 && mptr->user2_up!=1)
+        if(mptr->user2_up == 0 && mptr->user1_up != 1)
         {
-            printf("Enter the message (USER1) : ");
+            printf("Enter the message (USER2) : ");
             scanf(" %[^\n]",mptr->msg);
             if(strcmp(mptr->msg,"stop") == 0)
             {
                 mptr->flag=0;
             }
-            mptr->user1_up=1;
+            mptr->user2_up=1;
         }
-        mptr->turn=2;
+        mptr->turn=1;
     }
     if(munmap(mptr, SIZE) == -1)
     {
         perror("munmap");
         exit(1);
     }
+
     close(fd);
-    if(shm_unlink("Shared") == -1)
-    {
-        perror("shm_unlink");
-        exit(1);
-    }
     return 0;
 }
