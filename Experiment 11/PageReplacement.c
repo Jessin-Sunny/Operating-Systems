@@ -93,7 +93,7 @@ void lru(int referenceString[], int n, int capacity)
 {
     int frames[MAX_FRAMES] = {0};
     int pageFaults = 0;
-    int recent[MAX_FRAMES] = {0};
+    int recent[MAX_FRAMES] = {-1};
     int i, j;
 
     printf("\nLRU Page Replacement\n");
