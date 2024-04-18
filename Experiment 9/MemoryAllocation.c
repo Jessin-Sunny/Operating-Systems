@@ -101,6 +101,7 @@ void BestFit(int num_blocks, int num_proc, int block_sizes[], int process_sizes[
         }
     }
 }
+void FirstFit(int num_blocks, int num_proc, int block_sizes[], int process_sizes[])
 {
     int i, j;
     int fragment[MAX_BLOCKS], block_allocated[MAX_BLOCKS], block_index[MAX_BLOCKS];
