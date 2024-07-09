@@ -78,8 +78,13 @@ void lru()
         {
             oldest=recent[0];
             index=0;
-            for(k=1;k<capacity;k++)
+            for(k=0;k<capacity;k++)
             {
+                if(frames[k] == -1)  //in case of free frames
+                {
+                    index=k;
+                    break;
+                }
                 if(recent[k] < oldest)
                 {
                     oldest=recent[k];
