@@ -7,7 +7,7 @@
 |2   | Shell Programming   |
 |3   | System Calls - 1   |
 |4   | System Calls - 2   |
-|5   | CPU Scheduling   |
+|5   | CPU Scheduling - FIFO, SJF, Priority, Round Robin  |
 |6   | User Chat   |
 |7   | Classical Problems of Process Synchronization   |
 |8   | Banker's Algorithm   |
