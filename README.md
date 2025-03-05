@@ -5,8 +5,8 @@
 |----------|----------|
 |1   | Linux Commands   |
 |2   | Shell Programming   |
-|3   | System Calls   |
-|4   |    |
+|3   | System Calls - 1   |
+|4   | System Calls - 2   |
 |5   | CPU Scheduling   |
 |6   | User Chat   |
 |7   | Classical Problems of Process Synchronization   |
